@@ -1,0 +1,2 @@
+[![Java CI with Maven](https://github.com/Insomn1ac/job4j_todo/actions/workflows/maven.yml/badge.svg)](https://github.com/Insomn1ac/job4j_todo/actions/workflows/maven.yml)
+[![codecov](https://codecov.io/gh/Insomn1ac/job4j_todo/branch/main/graph/badge.svg?token=N1P4ST7B1P)](https://codecov.io/gh/Insomn1ac/job4j_todo)
