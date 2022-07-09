@@ -1,10 +1,12 @@
 [![Java CI with Maven](https://github.com/Insomn1ac/job4j_todo/actions/workflows/maven.yml/badge.svg)](https://github.com/Insomn1ac/job4j_todo/actions/workflows/maven.yml)
-[![codecov](https://codecov.io/gh/Insomn1ac/job4j_todo/branch/main/graph/badge.svg?token=N1P4ST7B1P)](https://codecov.io/gh/Insomn1ac/job4j_todo)
+[![codecov](https://codecov.io/gh/Insomn1ac/job4j_todo/branch/main/graph/badge.svg?token=KNDSJS7J76)](https://codecov.io/gh/Insomn1ac/job4j_todo)
 
-##Приложение "TODO List".
+<a name="title"><h2>Приложение TODO List</h2></a>
+
 Приложение-список задач. Можно просматривать, редактировать, добавлять и удалять задания.
 
-##Стек используемых технологий:
+<a name="tech"><h2>Стек используемых технологий</h2></a>
+
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
@@ -38,7 +40,7 @@
 
 Страница с подробным описанием отдельного незавершенного задания:
 ![newTaskDescPage](src/main/resources/attachments/newTaskDescription.png)
-При нажатии на кнопку "Выполнить" задание переходит в статус завершенного.
+При нажатии на кнопку "Выполнено" задание переходит в статус завершенного.
 
 
 Страница редактирования задания:
