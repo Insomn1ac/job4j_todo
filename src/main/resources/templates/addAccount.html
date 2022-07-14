@@ -17,47 +17,39 @@
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">Добавить задание</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link" th:if="${account.name == 'Гость'}" th:href="@{/loginPage}">
-                    <span th:text="${account.name}"></span>
-                    <span> | Войти</span>
-                </a>
-                <a class="nav-item nav-link" th:if="${account.name != 'Гость'}" th:href="@{/logout}">
-                    <span th:text="${account.name}"></span>
-                    <span> | Выйти</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-    <div class="row">
+    <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Новое задание.
+                Новый пользователь.
             </div>
             <div class="card-body">
-                <form th:action="@{/createTask}" method="POST">
+                <div th:if="${fail}" class="alert alert-danger" role="alert">
+                    Пользователь с введенными данными уже существует!
+                </div>
+                <form th:action="@{/createAccount}" method="POST">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
-                        <label for="name">Название задания</label>
+                        <label for="name">Имя</label>
                         <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div class="form-group">
-                        <label for="description">Описание</label>
-                        <input type="text" class="form-control" name="description" id="description">
+                        <label for="login">Логин</label>
+                        <input type="text" class="form-control" name="login" id="login">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
+            <div class="card-header">
+                <form th:action="@{/loginPage}" method="GET">
+                    Уже зарегистрированы?
+                    <button type="submit" class="btn btn-primary">Авторизоваться</button>
+                </form>
+            </div>
         </div>
-        <a class="nav-item nav-link" th:href="@{/tasks}">
-            <button type="submit" class="btn btn-primary">Назад</button>
-        </a>
     </div>
 </div>
 </body>

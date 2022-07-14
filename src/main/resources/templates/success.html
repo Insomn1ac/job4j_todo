@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <style>
+        .alert {
+            padding: 20px;
+            background-color: #23a21e;
+            color: white;
+        }
+    </style>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -22,11 +30,15 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">Выполненные задания</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#">TODO List, <small th:text="${account.name}"></small>!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" th:href="@{/tasks}">Все задания</a>
+            </div>
             <div class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" th:if="${account.name == 'Гость'}" th:href="@{/loginPage}">
                     <span th:text="${account.name}"></span>
@@ -39,32 +51,8 @@
             </div>
         </div>
     </nav>
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Описание</th>
-                <th scope="col">Время создания</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="task: ${completed}">
-                <td th:text="${task.name}"></td>
-                <td th:text="${task.created}"></td>
-                <td>
-                    <a class="nav-item nav-link" th:href="@{|/task/${task.id}|}">
-                        <button type="submit" class="btn btn-primary">Подробнее</button>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <a class="nav-item nav-link" th:href="@{/tasks}">
-            <button type="submit" class="btn btn-primary">Все задания</button>
-        </a>
-        <a class="nav-item nav-link" th:href="@{/newTasks}">
-            <button type="submit" class="btn btn-primary" style="background-color: darkred; border-color: darkred">Новые задания</button>
-        </a>
+    <div class="alert">
+        Пользователь успешно зарегистрирован.
     </div>
 </div>
 </body>
