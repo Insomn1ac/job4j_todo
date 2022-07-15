@@ -1,5 +1,5 @@
 [![Java CI with Maven](https://github.com/Insomn1ac/job4j_todo/actions/workflows/maven.yml/badge.svg)](https://github.com/Insomn1ac/job4j_todo/actions/workflows/maven.yml)
-[![codecov](https://codecov.io/gh/Insomn1ac/job4j_todo/branch/main/graph/badge.svg?token=KNDSJS7J76)](https://codecov.io/gh/Insomn1ac/job4j_todo)
+[![codecov](https://codecov.io/gh/Insomn1ac/job4j_todo/branch/master/graph/badge.svg?token=N1P4ST7B1P)](https://codecov.io/gh/Insomn1ac/job4j_todo)
 
 <a name="title"><h2>Приложение TODO List</h2></a>
 
@@ -13,6 +13,12 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+Страница авторизации пользователя в приложении:
+![authorizationPage](src/main/resources/attachments/authorizationPage.png)
+
+Страница регистрации нового аккаунта в приложении:
+![registrationPage](src/main/resources/attachments/registrationPage.png)
 
 Страница со всеми заданиями:
 ![allTasksPage](src/main/resources/attachments/allTasks.png)
