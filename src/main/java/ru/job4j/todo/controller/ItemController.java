@@ -20,50 +20,39 @@ public class ItemController {
         this.service = service;
     }
 
-    @GetMapping("/tasks")
-    public String index(Model model, HttpSession session) {
-        model.addAttribute("tasks", service.findAll());
+    private void setAccountToModel(Model model, HttpSession session) {
         Account account = (Account) session.getAttribute("account");
         if (account == null) {
             account = new Account();
             account.setName("Гость");
         }
         model.addAttribute("account", account);
+    }
+
+    @GetMapping("/tasks")
+    public String index(Model model, HttpSession session) {
+        model.addAttribute("tasks", service.findAll());
+        setAccountToModel(model, session);
         return "tasks";
     }
 
     @GetMapping("/completedTasks")
     public String completedTasks(Model model, HttpSession session) {
         model.addAttribute("completed", service.findCompletedTasks());
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            account = new Account();
-            account.setName("Гость");
-        }
-        model.addAttribute("account", account);
+        setAccountToModel(model, session);
         return "completedTasks";
     }
 
     @GetMapping("/newTasks")
     public String newTasks(Model model, HttpSession session) {
         model.addAttribute("newTasks", service.findNewTasks());
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            account = new Account();
-            account.setName("Гость");
-        }
-        model.addAttribute("account", account);
+        setAccountToModel(model, session);
         return "newTasks";
     }
 
     @GetMapping("/addTask")
     public String addTask(Model model, HttpSession session) {
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            account = new Account();
-            account.setName("Гость");
-        }
-        model.addAttribute("account", account);
+        setAccountToModel(model, session);
         return "addTask";
     }
 
@@ -77,24 +66,14 @@ public class ItemController {
     @GetMapping("/task/{taskId}")
     public String taskInfo(Model model, @PathVariable("taskId") int id, HttpSession session) {
         model.addAttribute("task", service.findById(id));
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            account = new Account();
-            account.setName("Гость");
-        }
-        model.addAttribute("account", account);
+        setAccountToModel(model, session);
         return "task";
     }
 
     @GetMapping("/formUpdateTask/{taskId}")
     public String formUpdateTask(Model model, @PathVariable("taskId") int id, HttpSession session) {
         model.addAttribute("task", service.findById(id));
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            account = new Account();
-            account.setName("Гость");
-        }
-        model.addAttribute("account", account);
+        setAccountToModel(model, session);
         return "updateTask";
     }
 

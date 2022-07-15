@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "account", uniqueConstraints = {@UniqueConstraint(columnNames = {"login", "password"})})
+@Table(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +12,7 @@ public class Account {
 
     private String name;
 
+    @Column(unique = true)
     private String login;
 
     private String password;

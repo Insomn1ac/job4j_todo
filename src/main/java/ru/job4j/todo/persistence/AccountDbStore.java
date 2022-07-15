@@ -32,11 +32,10 @@ public class AccountDbStore {
     public Optional<Account> findAccountByLoginAndPassword(String login, String password) {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            Optional<Account> account = Optional.of((Account)
-                    session.createQuery("from Account where login = :fLogin and password = :fPass")
+            Optional<Account> account = session.createQuery("from Account where login = :fLogin and password = :fPass")
                             .setParameter("fLogin", login)
                             .setParameter("fPass", password)
-                            .getSingleResult());
+                            .uniqueResultOptional();
             session.getTransaction().commit();
             return account;
         } catch (NoResultException e) {
@@ -47,10 +46,9 @@ public class AccountDbStore {
     public Optional<Account> findAccountByName(String name) {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            Optional<Account> account = Optional.of((Account)
-                    session.createQuery("from Account where name = :fName")
+            Optional<Account> account = session.createQuery("from Account where name = :fName")
                     .setParameter("fName", name)
-                    .getSingleResult());
+                    .uniqueResultOptional();
             session.getTransaction().commit();
             return account;
         } catch (NoResultException e) {
