@@ -45,12 +45,14 @@
             <tr>
                 <th scope="col">Описание</th>
                 <th scope="col">Время создания</th>
+                <th scope="col">Создатель</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="task: ${completed}">
                 <td th:text="${task.name}"></td>
                 <td th:text="${task.created}"></td>
+                <td th:text="${task.account.name}"></td>
                 <td>
                     <a class="nav-item nav-link" th:href="@{|/task/${task.id}|}">
                         <button type="submit" class="btn btn-primary">Подробнее</button>
@@ -61,6 +63,9 @@
         </table>
         <a class="nav-item nav-link" th:href="@{/tasks}">
             <button type="submit" class="btn btn-primary">Все задания</button>
+        </a>
+        <a class="nav-item nav-link" th:href="@{/userTasks}">
+            <button type="submit" class="btn btn-primary" style="background-color: goldenrod; border-color: goldenrod">Мои задания</button>
         </a>
         <a class="nav-item nav-link" th:href="@{/newTasks}">
             <button type="submit" class="btn btn-primary" style="background-color: darkred; border-color: darkred">Новые задания</button>

@@ -12,3 +12,5 @@ create table if not exists account(
     login varchar not null unique,
     password varchar not null
 );
+
+alter table items add column account_id int references account(id);

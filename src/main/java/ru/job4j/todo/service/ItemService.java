@@ -34,6 +34,10 @@ public class ItemService {
         return store.findById(id);
     }
 
+    public List<Item> findByAccountId(int accountId) {
+        return store.findByAccountId(accountId);
+    }
+
     public List<Item> findCompletedTasks() {
         return store.findCompletedTasks();
     }

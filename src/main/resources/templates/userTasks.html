@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <style>
+        button {
+            border: none;
+        }
+    </style>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -22,7 +28,7 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">Новые задания</a>
+        <a class="navbar-brand">Ваши задания, <small th:text="${account.name}"></small></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,14 +51,17 @@
             <tr>
                 <th scope="col">Описание</th>
                 <th scope="col">Время создания</th>
-                <th scope="col">Создатель</th>
+                <th scope="col">Состояние задачи</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="task: ${newTasks}">
+            <tr th:each="task: ${userTasks}">
                 <td th:text="${task.name}"></td>
                 <td th:text="${task.created}"></td>
-                <td th:text="${task.account.name}"></td>
+                <td th:switch="${task.done}">
+                    <span th:case="false">Новое задание</span>
+                    <span th:case="true">Выполнено</span>
+                </td>
                 <td>
                     <a class="nav-item nav-link" th:href="@{|/task/${task.id}|}">
                         <button type="submit" class="btn btn-primary">Подробнее</button>
@@ -64,11 +73,14 @@
         <a class="nav-item nav-link" th:href="@{/tasks}">
             <button type="submit" class="btn btn-primary">Все задания</button>
         </a>
-        <a class="nav-item nav-link" th:href="@{/userTasks}">
-            <button type="submit" class="btn btn-primary" style="background-color: goldenrod; border-color: goldenrod">Мои задания</button>
-        </a>
         <a class="nav-item nav-link" th:href="@{/completedTasks}">
             <button type="submit" class="btn btn-primary" style="background-color: green; border-color: green">Выполненные задания</button>
+        </a>
+        <a class="nav-item nav-link" th:href="@{/newTasks}">
+            <button type="submit" class="btn btn-primary" style="background-color: darkred; border-color: darkred">Новые задания</button>
+        </a>
+        <a class="nav-item nav-link" th:href="@{/addTask}">
+            <button type="submit" class="btn btn-primary">Добавить задание</button>
         </a>
     </div>
 </div>

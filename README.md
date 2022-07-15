@@ -14,6 +14,8 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
+<a name="tech"><h2>Скриншоты приложения</h2></a>
+
 Страница авторизации пользователя в приложении:
 ![authorizationPage](src/main/resources/attachments/authorizationPage.png)
 
@@ -24,15 +26,19 @@
 ![allTasksPage](src/main/resources/attachments/allTasks.png)
 У каждого задания в списке можно прочесть его конкретное описание, нажав кнопку "Подробнее".
 Переходы ниже таблицы заданий ведут на страницы с выполненными либо невыполненными заданиями, 
-также можно добавить новое задание.
+также можно просмотреть только задания залогиненного пользователя, либо добавить новое задание.
 
 
 Страница с завершенными заданиями:
-![completedTasksPage](src/main/resources/attachments/completedTasks.png)
+![completedTasksPage](src/main/resources/attachments/complTasks.png)
 
 
 Страница с новыми заданиями:
-![newTasksPage](src/main/resources/attachments/newTasks.png)
+![newTasksPage](src/main/resources/attachments/newTask.png)
+
+
+Страница с заданиями залогиненного в текущий момент пользователя:
+![userTasksPage](src/main/resources/attachments/userTasks.png)
 
 
 Страница добавления нового задания:

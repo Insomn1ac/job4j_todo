@@ -45,13 +45,20 @@ public class ItemDbStore implements IStore {
     }
 
     public List<Item> findAll() {
-        return tx(session -> session.createQuery("from Item").list(), sf);
+        return tx(session -> session.createQuery("from Item order by created").list(), sf);
     }
 
     public Item findById(int id) {
         return (Item) tx(session -> session.createQuery("from Item i where i.id = :fId")
                         .setParameter("fId", id)
                         .getSingleResult(),
+                sf);
+    }
+
+    public List<Item> findByAccountId(int accountId) {
+        return tx(session -> session.createQuery("from Item i where i.account.id = :fAccId")
+                        .setParameter("fAccId", accountId)
+                        .getResultList(),
                 sf);
     }
 

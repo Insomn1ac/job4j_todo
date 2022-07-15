@@ -50,6 +50,14 @@ public class ItemController {
         return "newTasks";
     }
 
+    @GetMapping("/userTasks")
+    public String userTasks(Model model, HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("userTasks", service.findByAccountId(account.getId()));
+        setAccountToModel(model, session);
+        return "userTasks";
+    }
+
     @GetMapping("/addTask")
     public String addTask(Model model, HttpSession session) {
         setAccountToModel(model, session);
