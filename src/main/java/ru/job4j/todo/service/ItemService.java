@@ -1,6 +1,7 @@
 package ru.job4j.todo.service;
 
 import org.springframework.stereotype.Service;
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Item;
 import ru.job4j.todo.persistence.ItemDbStore;
 
@@ -14,8 +15,8 @@ public class ItemService {
         this.store = store;
     }
 
-    public Item add(Item item) {
-        return store.add(item);
+    public Item add(Item item, List<String> categoryId) {
+        return store.add(item, categoryId);
     }
 
     public boolean update(Item item, int id) {

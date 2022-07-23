@@ -2,11 +2,13 @@ package ru.job4j.todo.persistence;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Item;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class ItemDbStore implements IStore {
@@ -17,9 +19,16 @@ public class ItemDbStore implements IStore {
         this.sf = sf;
     }
 
-    public Item add(Item item) {
-        return (Item) tx(session -> session.save(item),
+    public Item add(Item item, List<String> categoryId) {
+        tx(session -> {
+                    for (String id : categoryId) {
+                        Category category = session.get(Category.class, Integer.parseInt(id));
+                        item.getCategories().add(category);
+                    }
+                    return session.save(item);
+                },
                 sf);
+        return item;
     }
 
     public boolean update(Item item, int id) {
@@ -45,7 +54,7 @@ public class ItemDbStore implements IStore {
     }
 
     public List<Item> findAll() {
-        return tx(session -> session.createQuery("from Item order by created").list(), sf);
+        return tx(session -> session.createQuery("select distinct i from Item i join fetch i.categories order by i.created").list(), sf);
     }
 
     public Item findById(int id) {

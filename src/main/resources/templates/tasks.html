@@ -8,6 +8,10 @@
         button {
             border: none;
         }
+
+        .noBorder {
+            border: none !important;
+        }
     </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -50,6 +54,7 @@
             <thead>
             <tr>
                 <th scope="col">Описание</th>
+                <th scope="col">Категории задачи</th>
                 <th scope="col">Время создания</th>
                 <th scope="col">Состояние задачи</th>
                 <th scope="col">Создатель задачи</th>
@@ -58,6 +63,13 @@
             <tbody>
             <tr th:each="task: ${tasks}">
                 <td th:text="${task.name}"></td>
+                <td>
+                    <table class="table table-hover">
+                        <tr th:each="category : ${task.categories}">
+                            <td class="noBorder" th:text="${category.name}"></td>
+                        </tr>
+                    </table>
+                </td>
                 <td th:text="${task.created}"></td>
                 <td th:switch="${task.done}">
                     <span th:case="false">Новое задание</span>

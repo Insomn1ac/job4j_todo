@@ -5,28 +5,33 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.Account;
 import ru.job4j.todo.model.Item;
+import ru.job4j.todo.service.CategoryService;
 import ru.job4j.todo.service.ItemService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 public class ItemController {
     private final ItemService service;
+    private final CategoryService categoryService;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public ItemController(ItemService service) {
+    public ItemController(ItemService service, CategoryService categoryService) {
         this.service = service;
+        this.categoryService = categoryService;
     }
 
-    private void setAccountToModel(Model model, HttpSession session) {
+    private Account setAccountToModel(Model model, HttpSession session) {
         Account account = (Account) session.getAttribute("account");
         if (account == null) {
             account = new Account();
             account.setName("Гость");
         }
         model.addAttribute("account", account);
+        return account;
     }
 
     @GetMapping("/tasks")
@@ -61,13 +66,18 @@ public class ItemController {
     @GetMapping("/addTask")
     public String addTask(Model model, HttpSession session) {
         setAccountToModel(model, session);
+        model.addAttribute("categories", categoryService.findAll());
         return "addTask";
     }
 
     @PostMapping("/createTask")
-    public String createTask(@ModelAttribute Item item) {
+    public String createTask(@ModelAttribute Item item,
+                             @RequestParam("categoriesId") List<String> categoriesId,
+                             HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        item.setAccount(account);
         item.setCreated(LocalDateTime.now().format(formatter));
-        service.add(item);
+        service.add(item, categoriesId);
         return "redirect:/tasks";
     }
 

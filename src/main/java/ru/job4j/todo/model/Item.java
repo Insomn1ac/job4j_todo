@@ -1,6 +1,8 @@
 package ru.job4j.todo.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "items")
@@ -20,6 +22,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Category> categories = new HashSet<>();
 
     public Item() {
     }
@@ -78,5 +83,13 @@ public class Item {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
