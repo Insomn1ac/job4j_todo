@@ -5,15 +5,12 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Item;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class ItemDbStore implements IStore {
     private final SessionFactory sf;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public ItemDbStore(SessionFactory sf) {
         this.sf = sf;
@@ -35,7 +32,7 @@ public class ItemDbStore implements IStore {
         return tx(session -> session.createQuery("update Item i "
                                 + "set i.created = :created, i.name = :name, i.description = :description, i.done = :done "
                                 + "where i.id = :fId")
-                        .setParameter("created", LocalDateTime.now().format(formatter))
+                        .setParameter("created", new Date(System.currentTimeMillis()))
                         .setParameter("name", item.getName())
                         .setParameter("description", item.getDescription())
                         .setParameter("done", item.isDone())

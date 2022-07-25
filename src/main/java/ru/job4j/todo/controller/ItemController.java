@@ -9,15 +9,15 @@ import ru.job4j.todo.service.CategoryService;
 import ru.job4j.todo.service.ItemService;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class ItemController {
     private final ItemService service;
     private final CategoryService categoryService;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public ItemController(ItemService service, CategoryService categoryService) {
         this.service = service;
@@ -76,7 +76,7 @@ public class ItemController {
                              HttpSession session) {
         Account account = (Account) session.getAttribute("account");
         item.setAccount(account);
-        item.setCreated(LocalDateTime.now().format(formatter));
+        item.setCreated(new Date(System.currentTimeMillis()));
         service.add(item, categoriesId);
         return "redirect:/tasks";
     }

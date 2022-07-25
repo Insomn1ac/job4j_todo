@@ -1,6 +1,9 @@
 package ru.job4j.todo.model;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +18,8 @@ public class Item {
 
     private String description;
 
-    private String created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     private boolean done;
 
@@ -26,15 +30,10 @@ public class Item {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Category> categories = new HashSet<>();
 
-    public Item() {
-    }
+    @Transient
+    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public Item(String name, String description, String created, boolean done, Account account) {
-        this.name = name;
-        this.description = description;
-        this.created = created;
-        this.done = done;
-        this.account = account;
+    public Item() {
     }
 
     public int getId() {
@@ -61,12 +60,17 @@ public class Item {
         this.description = description;
     }
 
-    public String getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public void setCreated(Date created) {
+        String[] format = formatter.format(created).split("\\+");
+        try {
+            this.created = formatter.parse(format[0]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isDone() {
