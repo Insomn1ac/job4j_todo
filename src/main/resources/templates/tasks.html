@@ -70,7 +70,7 @@
                         </tr>
                     </table>
                 </td>
-                <td th:text="${task.created}"></td>
+                <td th:text="${#dates.format(task.created, 'dd MMMM yyyy HH:mm')}"></td>
                 <td th:switch="${task.done}">
                     <span th:case="false">Новое задание</span>
                     <span th:case="true">Выполнено</span>
